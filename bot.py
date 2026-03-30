@@ -12,7 +12,8 @@ from telegram.ext import (
     filters,
 )
 
-TOKEN = "8539216702:AAHOoZ8V5_oGsrnhxjg2xg4-4e9kLB7nSDo"
+# حطي التوكن هنا
+TOKEN = "PUT_YOUR_BOT_TOKEN_HERE"
 
 LANG, NAME, STUDENT_ID, PARENT_EMAIL, REQUEST_TYPE, ISSUE = range(6)
 
@@ -284,6 +285,21 @@ async def get_issue(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 
+async def send_excel(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    file_name = "complaints.xlsx"
+
+    if not os.path.exists(file_name):
+        await update.message.reply_text("لا يوجد ملف Excel حتى الآن.")
+        return
+
+    with open(file_name, "rb") as file:
+        await update.message.reply_document(
+            document=file,
+            filename="complaints.xlsx",
+            caption="ملف الشكاوى"
+        )
+
+
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get("lang") == "English":
         await update.message.reply_text(
@@ -317,6 +333,8 @@ def main():
     )
 
     app.add_handler(conv_handler)
+    app.add_handler(CommandHandler("excel", send_excel))
+
     app.run_polling()
 
 
