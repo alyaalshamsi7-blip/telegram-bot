@@ -13,7 +13,7 @@ from telegram.ext import (
 )
 
 # حطي التوكن هنا
-TOKEN = "PUT_YOUR_BOT_TOKEN_HERE"
+TOKEN = "8539216702:AAHOoZ8V5_oGsrnhxjg2xg4-4e9kLB7nSDo"
 
 LANG, NAME, STUDENT_ID, PARENT_EMAIL, REQUEST_TYPE, ISSUE = range(6)
 
